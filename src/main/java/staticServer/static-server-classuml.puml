@@ -1,0 +1,41 @@
+@startuml static-server-classuml
+skinparam classAttributeIconSize 0
+class HttpServer {
+    + void await()
+}
+
+class Request {
+    - String uri
+    - InputStream is
+    + boolean parse()
+    - boolean parseUri()
+}
+
+class Response {
+    - HashMap<String,String> head
+    - OutputStream os
+    + void send()
+}
+together {
+    class ServerSocket {
+        + Socket accept()
+    }
+    class Socket {
+        + getInputStream()
+        + getOutputStream()
+    }
+}
+
+HttpServer -->  ServerSocket : create >
+ServerSocket o-- Socket : has >
+HttpServer -->  Socket
+HttpServer -->  Request : create >
+Request --> Socket : read >
+HttpServer -->  Response : create >
+Response ..> Request
+Response --> File
+Response --> FileInputStream : read >
+FileInputStream ..> File
+Response --> Socket : write >
+
+@enduml

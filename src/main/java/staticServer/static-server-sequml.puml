@@ -1,0 +1,46 @@
+@startuml static-server-sequml
+HttpServer -> ServerSocket : new
+    loop listen to localhost:8080
+        ServerSocket -> Socket : accept()
+        HttpServer <- Socket : return
+        HttpServer -> Socket : getInputStream()
+        HttpServer <- Socket : return
+        HttpServer -> Socket : getOutputStream()
+        HttpServer <- Socket : return
+        HttpServer -> Request : new (inputStream)
+        |||
+        HttpServer -> Request : parse()
+        loop buffered read
+            Socket <- Request : read
+            Socket -> Request : return
+        end
+        Request -> Request : parseUri()
+        alt success
+            HttpServer <- Request : true
+            HttpServer -> Response : new (request, outputStream)
+        else parse error
+            HttpServer <- Request : false
+            HttpServer -> Response : new (server error, outputStream)
+        end
+        |||
+        HttpServer -> Response : send()
+        Response -> File : new (uri)
+        alt file exist
+            Response -> Socket : write OK
+            Response -> Socket : write head
+            Response -> FileInputStream : new (uri)
+            loop buffered
+                Response -> FileInputStream : read
+                Response <- FileInputStream : return
+                Response -> Socket : write body
+            end
+            Response -> FileInputStream : close()
+
+        else file not exist
+            Response -> Socket : write not found
+        end
+        HttpServer -> Socket : close()
+        |||
+    end
+
+@enduml
