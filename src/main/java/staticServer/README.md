@@ -17,6 +17,8 @@
 - Response类，CRLF行
 - Response类，响应实体，静态资源本身
 
-## UML
+## Class UML
 ![static-server-classuml](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/muscaestar/WebServerForFun/master/src/main/java/staticServer/static-server-classuml.puml)
+
+## Sequence UML
 ![static-server-sequml](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/muscaestar/WebServerForFun/master/src/main/java/staticServer/static-server-sequml.puml)
