@@ -15,7 +15,7 @@
 - Facade模式：在处理servlet请求的情况下，Request和Response有无关的公用方法，为了避免这些公用方法被后续调用，为这两个类准备门面类，对servlet仅暴露相关的接口
 
 ## Class UML
-![servlet-01-classuml](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/muscaestar/WebServerForFun/master/src/main/java/staticServer/servlet-01-classuml.puml)
+![servlet-01-classuml](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/muscaestar/WebServerForFun/master/src/main/java/servletServer01/servlet-01-classuml.puml)
 
 ## Sequence UML - 处理servlet请求
-![servlet-01-sequml](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/muscaestar/WebServerForFun/master/src/main/java/staticServer/servlet-01-sequml.puml)
+![servlet-01-sequml](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/muscaestar/WebServerForFun/master/src/main/java/servletServer01/servlet-01-sequml.puml)
