@@ -1,4 +1,5 @@
 @startuml servlet-01-sequml
+title servlet-01-sequml
 HttpServer -> ServerSocket : new
     loop listen to localhost:8080
         ServerSocket -> Socket : accept()

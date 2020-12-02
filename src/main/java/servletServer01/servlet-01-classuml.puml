@@ -1,5 +1,6 @@
 @startuml servlet-01-classuml
 skinparam classAttributeIconSize 0
+title servlet-01-classuml
 class HttpServer {
     + void await()
 }

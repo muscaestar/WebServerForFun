@@ -1,11 +1,12 @@
-package servletServer01;
 
 import javax.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * 用于测试ServletServer，编译后的class文件放入resources/WEB-INF/classes/
+ * 用于测试ServletServer，编译后的class文件放入resources/WEB-INF/classes/.
+ * 注意这个没有包名
+ * <br>
  * Created by muscaestar on 12/2/20
  *
  * @author muscaestar

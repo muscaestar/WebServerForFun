@@ -124,7 +124,7 @@ public class Response implements ServletResponse {
         }
     }
 
-    private void sendServerErrorResponse(String msg) {
+    public void sendServerErrorResponse(String msg) {
         String responseBody = "<h1>Server Error</h1><p>"+ msg +"</p>";
         String responseMsg = "HTTP/1.1 500 Server Error\r\n" +
                 "Server: Static Server\r\n" +

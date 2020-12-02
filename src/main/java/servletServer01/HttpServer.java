@@ -38,8 +38,8 @@ public class HttpServer {
                         response = new Response(os);
                     }
                     if (request.isServlet()) {
-                        // todo
-
+                        ServletProcessor servletProcessor = ServletProcessor.getInstance();
+                        servletProcessor.process(request, response);
                     } else {
                         StaticProcessor staticProcessor = StaticProcessor.getInstance();
                         staticProcessor.process(request, response);
