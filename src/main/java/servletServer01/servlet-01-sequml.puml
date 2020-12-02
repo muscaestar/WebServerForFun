@@ -1,0 +1,34 @@
+@startuml servlet-01-sequml
+HttpServer -> ServerSocket : new
+    loop listen to localhost:8080
+        ServerSocket -> Socket : accept()
+        HttpServer <- Socket : return
+        HttpServer -> Socket : getInputStream()
+        HttpServer <- Socket : return
+        HttpServer -> Socket : getOutputStream()
+        HttpServer <- Socket : return
+        HttpServer -> Request : new (inputStream)
+        |||
+        HttpServer -> Request : parse()
+        HttpServer <- Request : true
+        HttpServer -> Request : getUri()
+        HttpServer <- Request : return
+        HttpServer -> Response : new (request, outputStream)
+        alt uri start with /servlet
+            HttpServer -> ServletProcessor : process(request,response)
+            ServletProcessor -> Servlet : new
+            ServletProcessor <- Servlet : return
+            ServletProcessor -> Servlet : service(request, response)
+        |||
+        else uri start with /static
+            HttpServer -> StaticProcessor : process(request,response)
+            note over StaticProcessor
+                similar to static server
+            end note
+        end
+        |||
+
+        HttpServer -> Socket : close()
+        |||
+    end
+@enduml

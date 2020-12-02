@@ -1,0 +1,74 @@
+@startuml servlet-01-classuml
+skinparam classAttributeIconSize 0
+class HttpServer {
+    + void await()
+}
+interface javax.servlet.ServletRequest {
+}
+interface javax.servlet.ServletResponse {
+    - PrintWriter getWriter()
+}
+together {
+    class ServerSocket {
+        + Socket accept()
+    }
+    class Socket {
+        + getInputStream()
+        + getOutputStream()
+    }
+}
+together {
+    class RequestFacade {
+        - Request request
+    }
+    class Request {
+        - String uri
+        - InputStream is
+        + boolean parse()
+    }
+}
+together {
+    class ResponseFacade {
+        - Response response
+    }
+    class Response {
+        - HashMap<String,String> head
+        - OutputStream os
+        - Request request
+        + void sendStatic()
+    }
+}
+together {
+    class StaticProcessor <<Singleton>> {
+        + process(request, response)
+    }
+    class ServletProcessor <<Singleton>> {
+        + process(request, response)
+    }
+}
+
+
+javax.servlet.ServletRequest <|-- Request
+javax.servlet.ServletResponse <|-- Response
+javax.servlet.ServletRequest <|-- RequestFacade
+javax.servlet.ServletResponse <|-- ResponseFacade
+Request <.. RequestFacade
+Response <.. ResponseFacade
+
+
+HttpServer -->  ServerSocket : create >
+ServerSocket o-- Socket : has >
+HttpServer -->  Socket
+HttpServer -->  Request : create >
+HttpServer -->  Response : create >
+Response ..> Request
+
+HttpServer -> StaticProcessor
+HttpServer -> ServletProcessor
+StaticProcessor --> RequestFacade
+StaticProcessor --> ResponseFacade
+ServletProcessor --> RequestFacade
+ServletProcessor --> ResponseFacade
+
+
+@enduml
